@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnReset = document.getElementById('btn-reset');
     const btnSolve = document.getElementById('btn-solve');
     const timerDisplay = document.getElementById('timer');
+    const hintText = document.getElementById('hint-text');
+    const rotationButtons = document.querySelectorAll('.rotation-btn');
 
     // --- נתוני שלבי הלימוד (דוגמה) ---
     const learningStepsData = [
@@ -37,6 +39,20 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 8, title: "מיקום השפות הצהובות (PLL)", description: "השלב האחרון! נסדר את השפות הצהובות במקומן להשלמת הקובייה.", algorithm: "R U R' U R U U R' U / ..." }
     ];
     let currentStepIndex = -1; // אף שלב לא נבחר בהתחלה
+
+    // מערך של רמזים לפי שלבי פתרון
+    const solveHints = [
+        "ראשית, נסו ליצור צלב לבן בחלק העליון",
+        "עכשיו סדרו את הפינות הלבנות במקומן הנכון",
+        "טפלו בשכבה האמצעית - השתמשו ב-R U R' U' F' U F",
+        "צרו צלב צהוב בחלק העליון",
+        "סדרו את הפינות הצהובות למקומן הנכון",
+        "סיימו את פתרון הקובייה על ידי סידור השפות הצהובות"
+    ];
+    
+    // מערך של המהלכים האחרונים שבוצעו (נשמר לצורך הצגת היסטוריה)
+    let lastMoves = [];
+    const MAX_HISTORY_MOVES = 10; // מקסימום מהלכים שנשמור בהיסטוריה
 
     // --- פונקציות ---
 
@@ -91,6 +107,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // פונקציה לביצוע סיבוב של הקובייה
+    function performCubeMove(move) {
+        console.log(`מבצע מהלך: ${move}`);
+        
+        // ביצוע הסיבוב בקובייה
+        if (window.rubiksCubeUtils) {
+            window.rubiksCubeUtils.performMove(playCube, move);
+            
+            // הוספת המהלך להיסטוריה
+            lastMoves.push(move);
+            if (lastMoves.length > MAX_HISTORY_MOVES) {
+                lastMoves.shift(); // מסיר את המהלך הראשון כשעוברים את המקסימום
+            }
+            
+            // עדכון טקסט הרמז לכלול את המהלכים האחרונים
+            updateHintText();
+        }
+    }
+    
+    // עדכון הרמז לפי מצב הקובייה הנוכחי
+    function updateHintText(customHint = null) {
+        if (customHint) {
+            // אם ניתן רמז ספציפי, נציג אותו
+            hintText.textContent = customHint;
+        } else if (lastMoves.length > 0) {
+            // אחרת, נציג את המהלכים האחרונים
+            hintText.textContent = `המהלכים האחרונים: ${lastMoves.join(', ')}`;
+        } else {
+            hintText.textContent = "לחצו על כפתורי הסיבוב כדי להתחיל לשחק";
+        }
+    }
+    
+    // פונקציה לייצור רמז על סמך מצב הקובייה
+    function generateHint() {
+        // בפרויקט אמיתי, הפונקציה תבדוק את מצב הקובייה ותציע רמז לפי השלב בו המשתמש נמצא
+        const randomHintIndex = Math.floor(Math.random() * solveHints.length);
+        updateHintText(solveHints[randomHintIndex]);
+    }
+
     // --- הגדרת אירועים (Event Listeners) ---
 
     // ניווט ראשי
@@ -127,6 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // אירועי לחיצה על כפתורי סיבוב הקובייה
+    rotationButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const move = button.getAttribute('data-move');
+            if (move) {
+                performCubeMove(move);
+            }
+        });
+    });
 
     // --- לוגיקה של אזור המשחק (מצייני מיקום) ---
 
@@ -160,6 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // הפעלת פונקציית ערבוב הקוביה
         if (window.rubiksCubeUtils) {
             window.rubiksCubeUtils.scrambleCube(playCube);
+            // איפוס היסטוריית המהלכים בעת ערבוב
+            lastMoves = [];
+            updateHintText("הקובייה עורבבה! נסו לפתור אותה...");
         }
         startTimer(); // התחל טיימר כשמערבבים
     });
@@ -169,6 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // הפעלת פונקציית איפוס הקוביה
         if (window.rubiksCubeUtils) {
             window.rubiksCubeUtils.resetCube(playCube);
+            // איפוס היסטוריית המהלכים בעת איפוס
+            lastMoves = [];
+            updateHintText("הקובייה אופסה למצב פתור");
         }
         stopTimer();
         secondsElapsed = 0;
@@ -177,17 +247,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnSolve.addEventListener('click', () => {
         console.log("לוחץ על 'פתור (רמז)'");
-        // הפעלת פונקציית פתרון הקוביה
-        if (window.rubiksCubeUtils) {
-            window.rubiksCubeUtils.solveCube(playCube);
-        }
-        stopTimer(); // לעצור טיימר כשמבקשים פתרון
+        // הפעלת פונקציית הרמז (או פתרון מלא)
+        generateHint();
     });
 
 
     // --- אתחול ---
     showSection('home-section'); // הצג את דף הבית בטעינה
-    // --- !!! כאן יבוצע אתחול של סצנות ה-3D (גם ללימוד וגם למשחק) !!! ---
-    console.log("מאתחל רכיבי 3D (כאן יהיה הקוד של Three.js/React-Three-Fiber וכו')");
-
+    // הגדרת טקסט הרמז ההתחלתי
+    updateHintText("ערבבו את הקובייה כדי להתחיל לשחק");
 });

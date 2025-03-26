@@ -21,6 +21,10 @@ const CUBE_SIZE = 1;
 const CUBE_GAP = 0.08;
 const CUBE_PIECE_SIZE = (CUBE_SIZE - 2 * CUBE_GAP) / 3;
 
+// משתנים לשמירת מצב הקובייה האחרון
+let lastCubeState = null;
+let isCubeSolved = true;
+
 // אתחול
 document.addEventListener('DOMContentLoaded', () => {
     // אתחול הקוביות בשלושת האזורים
@@ -484,5 +488,6 @@ window.rubiksCubeUtils = {
     updateLearnCubeForStep,
     scrambleCube,
     resetCube,
-    solveCube
+    solveCube,
+    performMove  // הוספת הפונקציה לביצוע סיבובים
 };

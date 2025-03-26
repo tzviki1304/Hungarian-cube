@@ -82,8 +82,37 @@
                     <button id="btn-scramble">ערבב</button>
                     <button id="btn-reset">אפס</button>
                     <button id="btn-solve">פתור (רמז)</button>
-                    <!-- אפשר להוסיף כפתורי מהלכים R, L, U, D... -->
-                     <div id="timer">זמן: 00:00</div>
+                    <div id="timer">זמן: 00:00</div>
+                </div>
+                
+                <!-- תיבת הוראות משחק -->
+                <div class="play-instructions">
+                    <h3>הוראות משחק:</h3>
+                    <p>• גרירה: לסיבוב כל הקובייה (כדי לראות צדדים שונים)</p>
+                    <p>• לחיצה על כפתורי הסיבוב למטה לביצוע מהלכים</p>
+                    <p id="hint-text">-- הרמז יופיע כאן --</p>
+                </div>
+                
+                <!-- כפתורי סיבוב הקובייה -->
+                <div class="rotation-controls">
+                    <div class="rotation-row">
+                        <button class="rotation-btn" data-move="U">U</button>
+                        <button class="rotation-btn" data-move="U'">U'</button>
+                        <button class="rotation-btn" data-move="D">D</button>
+                        <button class="rotation-btn" data-move="D'">D'</button>
+                    </div>
+                    <div class="rotation-row">
+                        <button class="rotation-btn" data-move="R">R</button>
+                        <button class="rotation-btn" data-move="R'">R'</button>
+                        <button class="rotation-btn" data-move="L">L</button>
+                        <button class="rotation-btn" data-move="L'">L'</button>
+                    </div>
+                    <div class="rotation-row">
+                        <button class="rotation-btn" data-move="F">F</button>
+                        <button class="rotation-btn" data-move="F'">F'</button>
+                        <button class="rotation-btn" data-move="B">B</button>
+                        <button class="rotation-btn" data-move="B'">B'</button>
+                    </div>
                 </div>
             </div>
         </section>

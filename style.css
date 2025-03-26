@@ -179,6 +179,73 @@ button:disabled {
     margin-right: 20px; /* מרווח מימין לכפתורים */
 }
 
+/* תיבת הוראות המשחק */
+.play-instructions {
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 500px;
+    text-align: right;
+}
+
+.play-instructions h3 {
+    color: #4682b4;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.play-instructions p {
+    margin: 5px 0;
+}
+
+#hint-text {
+    font-weight: bold;
+    color: #5cb85c;
+    margin-top: 10px;
+}
+
+/* כפתורי סיבוב הקובייה */
+.rotation-controls {
+    margin: 15px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+.rotation-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.rotation-btn {
+    background-color: #4682b4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-width: 45px;
+}
+
+.rotation-btn:hover {
+    background-color: #3a6d99;
+}
+
+/* כפתור סיבוב נגד כיוון השעון */
+.rotation-btn[data-move$="'"] {
+    background-color: #d35400;
+}
+
+.rotation-btn[data-move$="'"]:hover {
+    background-color: #b14600;
+}
 
 footer {
     text-align: center;
