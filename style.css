@@ -1,0 +1,210 @@
+/* הגדרות כלליות */
+body {
+    font-family: Arial, sans-serif; /* או גופן ידידותי לילדים */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff; /* רקע תכלת בהיר */
+    direction: rtl; /* כיוון מימין לשמאל */
+    color: #333;
+}
+
+header {
+    background-color: #4682b4; /* כחול פלדה */
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover, nav a.active-nav {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* הסתרת כל הסקשנים כברירת מחדל */
+main section {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* הצגת הסקשן הפעיל */
+main section.active {
+    display: block;
+}
+
+h2 {
+    color: #4682b4;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* כפתורי קריאה לפעולה בדף הבית */
+.cta-buttons {
+    text-align: center;
+    margin: 25px 0;
+}
+
+button {
+    background-color: #5cb85c; /* ירוק */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* מציין מיקום ויזואלי / אזור קובייה */
+.visual-placeholder, .cube-container {
+    background-color: #e9e9e9;
+    border: 2px dashed #cccccc;
+    min-height: 250px; /* גובה מינימלי */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin: 20px auto;
+    padding: 15px;
+    width: 80%; /* רוחב */
+    max-width: 400px; /* רוחב מקסימלי */
+    aspect-ratio: 1 / 1; /* נסיון לשמור על ריבועיות */
+}
+
+/* אזור הלימוד */
+.learn-container {
+    display: flex;
+    gap: 20px;
+}
+
+.learn-steps-nav {
+    flex-basis: 200px; /* רוחב קבוע לניווט */
+    flex-shrink: 0;
+}
+
+.learn-steps-nav ol {
+    list-style-position: inside;
+    padding-right: 0;
+}
+
+.learn-steps-nav li a {
+    text-decoration: none;
+    color: #007bff;
+}
+.learn-steps-nav li a:hover, .learn-steps-nav li a.active-step {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+
+.learn-content {
+    flex-grow: 1; /* תוכן השלב יתפוס את שאר המקום */
+}
+
+#step-algorithm {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+.step-nav-buttons {
+     margin-top: 20px;
+     display: flex;
+     justify-content: space-between;
+}
+
+
+/* אזור המשחק */
+.play-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.play-controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#timer {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 20px; /* מרווח מימין לכפתורים */
+}
+
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* התאמות למסכים קטנים (בסיסי) */
+@media (max-width: 768px) {
+    .learn-container {
+        flex-direction: column;
+    }
+    .learn-steps-nav {
+        flex-basis: auto;
+        margin-bottom: 20px;
+    }
+     header h1 {
+        font-size: 2rem;
+    }
+     nav ul li {
+        margin: 0 8px;
+    }
+    button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}

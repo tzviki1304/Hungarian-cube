@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קוביה קידס - לומדים לפתור קובייה הונגרית</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- כאן נטען בעתיד ספריות 3D כמו Three.js -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script> -->
+</head>
+<body>
+
+    <header>
+        <h1>קוביה קידס</h1>
+        <nav>
+            <ul>
+                <li><a href="#" id="nav-home">דף הבית</a></li>
+                <li><a href="#" id="nav-learn">לומדים לפתור</a></li>
+                <li><a href="#" id="nav-play">משחקים עם הקובייה</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- אזור דף הבית -->
+        <section id="home-section" class="active">
+            <h2>ברוכים הבאים לקוביה קידס!</h2>
+            <p>כאן תלמדו צעד אחר צעד איך לפתור את הקובייה ההונגרית המפורסמת, ותוכלו גם להתאמן ולשחק עם קובייה וירטואלית.</p>
+            <div class="cta-buttons">
+                <button id="btn-go-learn">מתחילים ללמוד!</button>
+                <button id="btn-go-play">שחקו עם הקובייה!</button>
+            </div>
+            <div class="visual-placeholder">
+                <p>(כאן תהיה אנימציה או תמונה של קובייה)</p>
+            </div>
+        </section>
+
+        <!-- אזור הלימוד -->
+        <section id="learn-section">
+            <h2>לומדים לפתור צעד אחר צעד</h2>
+            <div class="learn-container">
+                <div class="learn-steps-nav">
+                    <h3>שלבי הפתרון:</h3>
+                    <ol id="steps-list">
+                        <!-- רשימת השלבים תיווצר דינמית או תהיה קבועה -->
+                        <li><a href="#" data-step="1">הכרת הקובייה</a></li>
+                        <li><a href="#" data-step="2">הצלב הלבן</a></li>
+                        <li><a href="#" data-step="3">פינות לבנות</a></li>
+                        <li><a href="#" data-step="4">שכבה אמצעית</a></li>
+                        <li><a href="#" data-step="5">צלב צהוב</a></li>
+                         <li><a href="#" data-step="6">כיוון שכבה צהובה</a></li>
+                         <li><a href="#" data-step="7">מיקום פינות צהובות</a></li>
+                         <li><a href="#" data-step="8">מיקום שפות צהובות</a></li>
+                    </ol>
+                </div>
+                <div class="learn-content">
+                    <h3 id="step-title">בחרו שלב מהרשימה</h3>
+                    <p id="step-description"></p>
+                    <div id="learn-cube-container" class="cube-container">
+                        <p>(כאן יוצג מודל 3D אינטראקטיבי להדגמת השלב)</p>
+                        <p id="step-algorithm"></p>
+                    </div>
+                     <div class="step-nav-buttons">
+                        <button id="btn-prev-step" disabled>הקודם</button>
+                        <button id="btn-next-step" disabled>הבא</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- אזור המשחק -->
+        <section id="play-section">
+            <h2>אזור המשחק</h2>
+            <p>נסו לפתור את הקובייה הווירטואלית!</p>
+            <div class="play-container">
+                <div id="play-cube-container" class="cube-container">
+                    <p>(כאן יוצג מודל 3D אינטראקטיבי מלא למשחק)</p>
+                </div>
+                <div class="play-controls">
+                    <button id="btn-scramble">ערבב</button>
+                    <button id="btn-reset">אפס</button>
+                    <button id="btn-solve">פתור (רמז)</button>
+                    <!-- אפשר להוסיף כפתורי מהלכים R, L, U, D... -->
+                     <div id="timer">זמן: 00:00</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 קוביה קידס</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
