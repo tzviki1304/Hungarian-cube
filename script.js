@@ -84,9 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
             btnPrevStep.disabled = (currentStepIndex === 0);
             btnNextStep.disabled = (currentStepIndex === learningStepsData.length - 1);
 
-            // --- !!! כאן נפעיל את הלוגיקה של ה-3D להדגים את השלב !!! ---
-            console.log(`טוען הדגמת 3D עבור שלב ${stepData.id}`);
-            learnCubeContainer.innerHTML = `<p>(מודל 3D אינטראקטיבי להדגמת שלב ${stepData.id}: ${stepData.title})</p><p id="step-algorithm">${stepAlgorithm.textContent}</p>`; // החלפת התוכן
+            // עדכון קוביית הלימוד להדגמת השלב
+            if (window.rubiksCubeUtils) {
+                window.rubiksCubeUtils.updateLearnCubeForStep(stepData.id);
+            }
         }
     }
 
@@ -156,15 +157,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnScramble.addEventListener('click', () => {
         console.log("לוחץ על 'ערבב'");
-        // --- !!! כאן תופעל פונקצית ערבוב ב-3D !!! ---
-        playCubeContainer.innerHTML = "<p>(הקובייה עורבבה באופן אקראי)</p>";
+        // הפעלת פונקציית ערבוב הקוביה
+        if (window.rubiksCubeUtils) {
+            window.rubiksCubeUtils.scrambleCube(playCube);
+        }
         startTimer(); // התחל טיימר כשמערבבים
     });
 
     btnReset.addEventListener('click', () => {
         console.log("לוחץ על 'אפס'");
-        // --- !!! כאן תופעל פונקצית איפוס ב-3D למצב פתור !!! ---
-        playCubeContainer.innerHTML = "<p>(הקובייה אופסה למצב פתור)</p>";
+        // הפעלת פונקציית איפוס הקוביה
+        if (window.rubiksCubeUtils) {
+            window.rubiksCubeUtils.resetCube(playCube);
+        }
         stopTimer();
         secondsElapsed = 0;
         timerDisplay.textContent = `זמן: ${formatTime(secondsElapsed)}`;
@@ -172,8 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnSolve.addEventListener('click', () => {
         console.log("לוחץ על 'פתור (רמז)'");
-        // --- !!! כאן אפשר להפעיל אנימציה של פתרון או הצגת המהלך הבא ב-3D !!! ---
-        playCubeContainer.innerHTML = "<p>(מציג רמז או פתרון...)</p>";
+        // הפעלת פונקציית פתרון הקוביה
+        if (window.rubiksCubeUtils) {
+            window.rubiksCubeUtils.solveCube(playCube);
+        }
         stopTimer(); // לעצור טיימר כשמבקשים פתרון
     });
 
